@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "gem_watch/command"
+
+GemWatch::Command.new.run ARGV
