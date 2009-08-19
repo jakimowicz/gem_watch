@@ -9,11 +9,14 @@ require 'yaml'
 require "gem_watch"
 require "gem_watch/command_options"
 
+# Command implements a command to be executed based on options.
+# It is directly used by the command line interface.
 class GemWatch::Command
   def initialize
     @options = GemWatch::CommandOptions.new
   end
   
+  # Run the command based on default options and given <tt>args</tt>.
   def run(args = {})
     parse_options args
     gw = GemWatch.new(:update => @options.check_update_on)
@@ -25,6 +28,8 @@ class GemWatch::Command
     end
   end
   
+  protected
+  # Based on options, display given <tt>str</tt> to stdout or to mail.
   def say(str)
     if @options.stdout or @options.email_recipients.empty?
       puts str
@@ -33,6 +38,7 @@ class GemWatch::Command
     end
   end
   
+  # Send an email with given <tt>message</tt>.
   def send_email(message)
     email = <<-END_OF_MESSAGE
 From: GemWatch <#{@options.email_from}>
@@ -49,6 +55,7 @@ END_OF_MESSAGE
   	end
   end
   
+  # Parse given <tt>args</tt> with OptionParser to generate options.
   def parse_options(args)
     OptionParser.new do |opts|
       opts.banner = "Usage: gemwatch [options]"
@@ -112,6 +119,8 @@ END_OF_MESSAGE
     end
   end
   
+  # Given a <tt>yaml</tt> object and a <tt>key</tt> string, returns the value.
+  # If <tt>key</tt> contains an underscore character, it will consider each word between underscores as a subtree.
   def yaml_value(yaml, key)
     if key.include?('_')
       first_key, sep, rest = key.partition('_')
