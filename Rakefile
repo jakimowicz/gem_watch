@@ -10,7 +10,7 @@ begin
     gem.email = "fabien@jakimowicz.com"
     gem.homepage = "http://github.com/jakimowicz/gem_watch"
     gem.authors = ["Fabien Jakimowicz"]
-    gem.rubyforge_project = "gem_watch"
+    gem.rubyforge_project = "gemwatch"
     gem.add_development_dependency "thoughtbot-shoulda"
     gem.add_dependency 'yaml'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
