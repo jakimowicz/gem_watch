@@ -1,9 +1,12 @@
-= LongURL
+= GemWatch
 
 == DESCRIPTION
 GemWatch helps sysadmins to watch their systems to see if an update is available for installed gems. GemWatch can watch all installed gems or only specified gems. Results can be outputted to stdout or email(s) addresses.
 
+A cron task launching GemWatch with a configuration file can be used to launch checks every day.
+
 == SYNOPSIS
+
 === Command line options
   Checks options:
       -u=<all|gem1, gem2, ...>         Precise what are the gems to check for the update.
