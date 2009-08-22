@@ -1,8 +1,6 @@
 # Pure ruby requires
 require 'optparse'
 require 'net/smtp'
-
-# Gems
 require 'yaml'
 
 # Internal stuff
