@@ -70,7 +70,6 @@ END_OF_MESSAGE
       
       opts.on "-e", "--email-recipient=email1, email2, ...", "Email address to send results." do |email|
         @options.email_recipients = email
-        @options.stdout = false
       end
       
       opts.on "-s", "--email-subject=subject", "Subject used in the email." do |subject|
@@ -79,7 +78,6 @@ END_OF_MESSAGE
       
       opts.on "-f", "--email-from=email", "Email's sender." do |email|
         @options.email_recipient = email.split(',').collect {|email| email.strip}
-        @options.stdout = false
       end
       
       opts.separator ""
@@ -120,11 +118,13 @@ END_OF_MESSAGE
   # Given a <tt>yaml</tt> object and a <tt>key</tt> string, returns the value.
   # If <tt>key</tt> contains an underscore character, it will consider each word between underscores as a subtree.
   def yaml_value(yaml, key)
+    yaml[key].value
+  rescue
     if key.include?('_')
       first_key, sep, rest = key.partition('_')
-      yaml_value yaml[first_key], rest
+      yaml_value(yaml[first_key], rest) rescue nil
     else
-      yaml[key].value rescue nil
+      nil
     end
   end
 end

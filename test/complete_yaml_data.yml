@@ -1,0 +1,11 @@
+email:
+  recipients: admin@example.com
+  subject: Critical update !
+  from: bob@service.com
+
+smtp:
+  host: 127.0.0.1
+  port: 25
+
+check:
+  update_on: super_security, rails
